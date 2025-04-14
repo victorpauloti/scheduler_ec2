@@ -1,4 +1,4 @@
-resource "aws_lambda_function" "test_lambda" {
+resource "aws_lambda_function" "on_off_lambda" {
   # If the file is not in the current working directory you will need to include a
   # path.module in the filename.
   filename      = "lambda_function_payload.zip"
@@ -20,6 +20,19 @@ resource "aws_lambda_function" "test_lambda" {
 
 }
 
+# grants permission to the CloudWatch event rule to invoke the Lambda function
+resource "aws_lambda_permission" "lambda-on" {
+  action        = "lambda:InvokeFunction"
+  function_name = var.lambda_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.ec2_instance.arn
+}
+resource "aws_lambda_permission" "lambda-off" {
+  action        = "lambda:InvokeFunction"
+  function_name = var.lambda_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.off_ec2_instance.arn
+}
 # resource "aws_lambda_layer_version" "lambda_layer" {
 #   filename   = "../../code/layer/lambda_layer.zip"
 #   layer_name = var.layer_name
