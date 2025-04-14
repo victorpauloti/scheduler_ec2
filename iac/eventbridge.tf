@@ -3,7 +3,7 @@ resource "aws_cloudwatch_event_rule" "ec2_instance" {
   name        = "schedule-on"
   description = "start instance EC2 with lambda lambda-schedule-turn-off-ec2-hom"
   # cron(minutes hours day-of-month month day-of-week year)
-  schedule_expression = "cron(30 20 ? * MON-FRI *)"
+  schedule_expression = "cron(00 10 ? * MON-FRI *)"
 }
 ## regra oara desligar ec2
 resource "aws_cloudwatch_event_rule" "off_ec2_instance" {
@@ -11,7 +11,7 @@ resource "aws_cloudwatch_event_rule" "off_ec2_instance" {
   description = "start instance EC2 with lambda lambda-schedule-turn-off-ec2-hom"
 
   # cron(minutes hours day-of-month month day-of-week year)
-  schedule_expression = "cron(50 23 ? * MON-FRI *)"
+  schedule_expression = "cron(00 21 ? * MON-FRI *)"
 
 }
 # triger ONN
