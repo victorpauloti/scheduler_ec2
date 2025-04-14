@@ -5,11 +5,11 @@ client_ec2 = boto3.client('ec2')
 
 def lambda_handler(event, context):
 
-    print(event)
+    print('ESTE EVENTO',event)
     instance_id = 'i-02a95c382409e19ae'
 
-    on = True
-    off = False
+    on = 'schedule-on' in event['resources'][0]
+    off = 'schedule-off' in event['resources'][0]
 
     if on:
         client_ec2.start_instances(InstanceIds=[instance_id])

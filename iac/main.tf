@@ -5,11 +5,8 @@ resource "aws_lambda_function" "on_off_lambda" {
   function_name = var.lambda_name
   role          = aws_iam_role.iam_lambda.arn
   handler       = var.lambda_handler
-
   source_code_hash = data.archive_file.lambda.output_base64sha256
-
   runtime = var.lambda_runtime
-
   #layers = [aws_lambda_layer_version.lambda_layer.arn]
 
   environment {
