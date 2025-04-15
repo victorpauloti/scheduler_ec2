@@ -19,6 +19,9 @@ def lambda_handler(event, context):
         message = 'Instancia desligada com sucesso'
     else:   
         message = 'Nenhuma ação foi tomada'
+
+    print(message)
+    
     return {
         'statusCode': 200,
         'body': message
